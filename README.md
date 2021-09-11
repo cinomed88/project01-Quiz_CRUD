@@ -8,3 +8,11 @@
 
 
  - Skills used : HTML, CSS, JavaScript, Node.js, MySQL, Bootstrap
+
+### 1. Admin Page
+
+![Admin Page](https://user-images.githubusercontent.com/45385949/132962599-334d161b-993f-4723-a4f0-e734acde0332.png)
+
+### 2. Student Page
+
+![Student Page](https://user-images.githubusercontent.com/45385949/132962601-7ffd1a53-ae19-4c70-b3e1-395bea4b4731.png)
