@@ -93,7 +93,7 @@ const updateQuestion = (req, res) => {
 const deleteQuestion = (req, res) => {
     let body = '';
     req.on('data', chunk => {
-        body += chunk.toString(); // convert Buffer to string
+        body += chunk.toString();
     });
     req.on('end', () => {
         let bodyStr = parse(body).data;
