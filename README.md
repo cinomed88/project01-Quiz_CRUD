@@ -12,8 +12,8 @@
  
  ## Future Work: 
  
- - XMLHttpRequest -> Fetch API (Cause of slow initial connection issue)
- - 3 pages -> SPA (For better UX)
+ - XMLHttpRequest -> Fetch API, Change how to retrieve data (Cause of slow initial connection issue)
+ - 3 pages -> SPA (use React) (For better UX)
  - Add Login function
 
 
