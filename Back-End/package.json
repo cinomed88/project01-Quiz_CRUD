@@ -1,14 +1,16 @@
 {
-    "name": "project01",
-    "version": "1.0.0",
-    "description": "My Node-Mysql App",
-    "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Lucas Gong",
-    "license": "",
-    "dependencies": {
-        "mysql": "^2.18.1"
-    }
+  "name": "project01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Gong",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
 }
