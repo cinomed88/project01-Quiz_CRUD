@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
                             ON q.id = c.id_question"
             conn.query(getSql, (err, data) => {
                 if (!err) {
-                    console.log(data)
+                    // console.log(data)
                     res.json(data)
                 } else {
                     console.log(`query error : ${err}`)
@@ -41,7 +41,7 @@ router.post("/", (req, res) => {
         body += chunk.toString()
     }).on('end', () => {
         const bodyObj = JSON.parse(body)
-        console.log(bodyObj)
+        // console.log(bodyObj)
         db.getConnection((err, conn) => {
             if (err){
                 throw err
@@ -49,7 +49,8 @@ router.post("/", (req, res) => {
                 res.on('error', (err) => {
                 console.error(err)
                 }) 
-                const postSql1 = `INSERT INTO questiont (id, question, answer) VALUES (?,?,?)`
+                const postSql1 = `INSERT INTO questiont \
+                                    (id, question, answer) VALUES (?,?,?)`
                 conn.query(postSql1, [ bodyObj.id, bodyObj.question, bodyObj.answer ], (err, data) => {
                     if (err) {
                         console.log(`query error : ${err}`)
@@ -59,7 +60,8 @@ router.post("/", (req, res) => {
                 for (let i=0; i < bodyObj.choiceDesc.length; i++){
                     if(!bodyObj.choiceDesc[i]) break
 
-                    const postSql2 = `INSERT INTO choicet (id_question, choice, description) VALUES (?,?,?)`
+                    const postSql2 = `INSERT INTO choicet \
+                                        (id_question, choice, description) VALUES (?,?,?)`
                     conn.query(postSql2, [ bodyObj.id, (i+1), bodyObj.choiceDesc[i] ], (err, data) => {
                         if (err) {
                             console.log(`query error : ${err}`)
@@ -74,37 +76,47 @@ router.post("/", (req, res) => {
             })
         })
     })
-    res.end("POST request successfully processed.")    
+    res.send("POST request processed.")    
 })
 
 router.put("/", (req,res) => {
     console.log("routing to PUT")
     let body = ''
-    req.on('data', chunk => {
+    req.on('error', (err) => {
+        console.error(err)
+    }).on('data', chunk => {
         body += chunk.toString()
+    }).on('end', () => {
+        const bodyObj = JSON.parse(body)
+        console.log(bodyObj)
+        db.getConnection((err, conn) => {
+            if (err){
+                throw err
+            } else {
+                const putSql1 = "UPDATE questiont SET question = ?, answer = ? WHERE id = ?"
+                conn.query(putSql1, [ bodyObj.question, bodyObj.answer, bodyObj.id ], (err, data) => {
+                    if (err) {
+                        console.log(`query error : ${err}`)
+                        res.send(err)
+                    }
+                })
+                for (let i=0; i < bodyObj.choiceDesc.length; i++){
+                    const putSql2 = "UPDATE choicet SET description = ? WHERE id_question = ? AND choice = ?";    
+                    conn.query(putSql2, [ bodyObj.choiceDesc[i], bodyObj.id, (i+1) ], function (err, data) {
+                        if (err) {
+                            console.log(`query error : ${err}`)
+                            res.send(err)
+                        }
+                    }); 
+                }
+            }
+            conn.release(err => {
+                if (err) throw err
+                console.log('Closed database connection.')
+            })
+        })
     })
-    req.on('end', () => {
-        console.log(body)
-        // db.getConnection((err, conn) => {
-        //     if (err){
-        //         throw err
-        //     } else {
-        //         const putSql = "UPDATE twits SET name = ?, time = ?, text = ? WHERE id = ?"
-        //         conn.query(putSql, [bodyObj.name, bodyObj.time, bodyObj.text, bodyObj.id], (err, rows) => {
-        //             if (!err) {
-        //                 res.send(rows)
-        //             } else {
-        //                 console.log(`query error : ${err}`)
-        //                 res.send(err)
-        //             }
-        //         })
-        //     }
-        //     conn.release(err => {
-        //         if (err) throw err
-        //         console.log('Closed database connection.')
-        //     })
-        // })
-    })
+    res.send("PUT request processed.") 
 })
 
 router.delete("/", (req,res) => {
