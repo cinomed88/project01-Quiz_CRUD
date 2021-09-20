@@ -76,7 +76,7 @@ router.post("/", (req, res) => {
             })
         })
     })
-    res.send("POST request processed.")    
+    res.end("POST request processed.")    
 })
 
 router.put("/", (req,res) => {
@@ -116,25 +116,33 @@ router.put("/", (req,res) => {
             })
         })
     })
-    res.send("PUT request processed.") 
+    res.end("PUT request processed.") 
 })
 
 router.delete("/", (req,res) => {
     console.log("routing to DELETE")
-    let deleteId = ''
-    req.on('data', chunk => {
-        deleteId += chunk.toString()
-    })
-    req.on('end', () => {
+    let body = ''
+    req.on('error', (err) => {
+        console.error(err)
+    }).on('data', chunk => {
+        body += chunk.toString()
+    }).on('end', () => {
+        const bodyObj = JSON.parse(body)
+        console.log(bodyObj.id)
         db.getConnection((err, conn) => {
             if (err){
                 throw err
             } else {
-                const deleteSql = "DELETE FROM twits WHERE id = ?"
-                conn.query(deleteSql, [ deleteId ], (err, rows) => {
-                    if (!err) {
-                        res.send(rows)
-                    } else {
+                const deleteSql1 = "DELETE FROM choicet WHERE id_question = ?"
+                conn.query(deleteSql1, [ bodyObj.id ], (err, data) => {
+                    if (err) {
+                        console.log(`query error : ${err}`)
+                        res.send(err)
+                    }
+                })
+                const deleteSql2 = "DELETE FROM questiont WHERE id = ?";    
+                conn.query(deleteSql2, [ bodyObj.id ], function (err, data) {
+                    if (err) {
                         console.log(`query error : ${err}`)
                         res.send(err)
                     }
@@ -145,29 +153,7 @@ router.delete("/", (req,res) => {
                 console.log('Closed database connection.')
             })
         })
-    })    
+    })
+    res.end("DELETE request processed.")     
 })
 module.exports = router
-
-// http.createServer(function (req, res){
-//     const query = url.parse(req.url, true);
-
-//     res.writeHead(200, {
-//         'Content-type': 'text/plain; charset=utf-8', 
-//         'Access-Control-Allow-Origin': '*',
-//         'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE'
-//     });
-
-//     if (req.method === "GET" && query.pathname === endPointRoot + "questions"){
-//         console.log("get got");
-//         manipulateDB.readQuestions(req,res);
-//     } else if (req.method ==="POST" && query.pathname === endPointRoot + "questions"){
-//         console.log("post got");
-//         manipulateDB.createQuestion(req,res);
-//     } else if ((req.method === "PUT" || req.method === "OPTIONS") && query.pathname === endPointRoot + "put_questions"){
-//         console.log("put got");
-//         manipulateDB.updateQuestion(req,res);
-//     } else if ((req.method === "DELETE" || req.method === "OPTIONS") && query.pathname === endPointRoot + "del_questions"){
-//         manipulateDB.deleteQuestion(req,res);
-//     } 
-// }).listen();
