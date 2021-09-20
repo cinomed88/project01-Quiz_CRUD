@@ -2,21 +2,25 @@ const express = require('express')
 const router = express.Router()
 const db = require("./config")
 
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
     console.log("routing to GET")
     db.getConnection((err, conn) => {
         if (err){
             throw err
         } else {
+            res.on('error', (err) => {
+                console.error(err)
+            }) 
             const getSql = "SELECT q.id, q.question, q.answer, c.choice, c.description\
                             FROM questiont AS q\
                             RIGHT JOIN choicet AS c\
                             ON q.id = c.id_question"
-            conn.query(getSql, (err, rows) => {
+            conn.query(getSql, (err, data) => {
                 if (!err) {
-                    console.log(rows)
-                    res.send(rows)
+                    console.log(data)
+                    res.json(data)
                 } else {
+                    console.log(`query error : ${err}`)
                     res.send(err)
                 }
             })
@@ -25,31 +29,44 @@ router.get("/", async (req, res) => {
             if (err) throw err
             console.log('Closed database connection.')
         })
-    })    
+    })   
 })
 
-router.post("/", async (req,res) => {
+router.post("/", (req, res) => {
     console.log("routing to POST")
     let body = ''
-    req.on('data', chunk => {
+    req.on('error', (err) => {
+        console.error(err)
+    }).on('data', chunk => {
         body += chunk.toString()
-    })
-    req.on('end', () => {
+    }).on('end', () => {
         const bodyObj = JSON.parse(body)
         console.log(bodyObj)
         db.getConnection((err, conn) => {
             if (err){
                 throw err
             } else {
-                const postSql = `INSERT INTO twits (id, name, time, text) VALUES (?,?,?,?)`
-                conn.query(postSql, [bodyObj.id, bodyObj.name, bodyObj.time, bodyObj.text], (err, rows) => {
-                    if (!err) {
-                        res.send(rows)
-                    } else {
+                res.on('error', (err) => {
+                console.error(err)
+                }) 
+                const postSql1 = `INSERT INTO questiont (id, question, answer) VALUES (?,?,?)`
+                conn.query(postSql1, [ bodyObj.id, bodyObj.question, bodyObj.answer ], (err, data) => {
+                    if (err) {
                         console.log(`query error : ${err}`)
                         res.send(err)
                     }
                 })
+                for (let i=0; i < bodyObj.choiceDesc.length; i++){
+                    if(!bodyObj.choiceDesc[i]) break
+
+                    const postSql2 = `INSERT INTO choicet (id_question, choice, description) VALUES (?,?,?)`
+                    conn.query(postSql2, [ bodyObj.id, (i+1), bodyObj.choiceDesc[i] ], (err, data) => {
+                        if (err) {
+                            console.log(`query error : ${err}`)
+                            res.send(err)
+                        }
+                    })
+                }
             }
             conn.release(err => {
                 if (err) throw err
@@ -57,7 +74,7 @@ router.post("/", async (req,res) => {
             })
         })
     })
-
+    res.end("POST request successfully processed.")    
 })
 
 router.put("/", (req,res) => {
@@ -67,27 +84,26 @@ router.put("/", (req,res) => {
         body += chunk.toString()
     })
     req.on('end', () => {
-        const bodyObj = JSON.parse(body)
-        console.log(bodyObj)
-        db.getConnection((err, conn) => {
-            if (err){
-                throw err
-            } else {
-                const putSql = "UPDATE twits SET name = ?, time = ?, text = ? WHERE id = ?"
-                conn.query(putSql, [bodyObj.name, bodyObj.time, bodyObj.text, bodyObj.id], (err, rows) => {
-                    if (!err) {
-                        res.send(rows)
-                    } else {
-                        console.log(`query error : ${err}`)
-                        res.send(err)
-                    }
-                })
-            }
-            conn.release(err => {
-                if (err) throw err
-                console.log('Closed database connection.')
-            })
-        })
+        console.log(body)
+        // db.getConnection((err, conn) => {
+        //     if (err){
+        //         throw err
+        //     } else {
+        //         const putSql = "UPDATE twits SET name = ?, time = ?, text = ? WHERE id = ?"
+        //         conn.query(putSql, [bodyObj.name, bodyObj.time, bodyObj.text, bodyObj.id], (err, rows) => {
+        //             if (!err) {
+        //                 res.send(rows)
+        //             } else {
+        //                 console.log(`query error : ${err}`)
+        //                 res.send(err)
+        //             }
+        //         })
+        //     }
+        //     conn.release(err => {
+        //         if (err) throw err
+        //         console.log('Closed database connection.')
+        //     })
+        // })
     })
 })
 
