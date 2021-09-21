@@ -8,12 +8,14 @@
  - This is an upgraded version of one academic project. Deliberately, minimum libraries were used for it.
 
 
- ## Skills used : HTML, CSS, JavaScript, Node.js, MySQL, Bootstrap
+ ## Skills used : HTML, CSS, JavaScript, React, Node.js, MySQL/MariaDB, Material-UI
  
+ ## Issue & Solution:
+
+ - Slow initiation : Change the data retrieving structure, XMLHttpRequest -> Axios
+ - Worse UX : 3 Pages -> SPA (use React)   (is Doing)
+
  ## Future Work: 
- 
- - XMLHttpRequest -> Fetch API, Change how to retrieve data (Cause of slow initial connection issue)
- - 3 pages -> SPA (use React) (For better UX)
  - Add Login function
 
 
