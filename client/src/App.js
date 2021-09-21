@@ -68,51 +68,54 @@ function App() {
   }, [])
 
   const addData = (data) => {
-    // if (!data) console.log("data - " +data)
-    // setQuizData(quizData.concat({ id: id+1, ...data }))
-    // setId(id+1)    
-    // axios.post(endPoint, {
-    //   id: id+1,
-    //   question: data.question,
-    //   answer: data.answer,
-    //   choiceDesc: data.choiceDesc     
-    // })
-    // .then(function (response) {
-    //   console.log(response)
-    // })
-    // .catch(function (error) {
-    //   console.log(error)
-    // });
+    if (!data) console.log("data was not input yet.")
+
+    setQuizData(quizData.concat({ id: id+1, ...data }))
+    console.log(quizData) // Npt applied yet
+    setId(id+1)
+    console.log(id) // Npt applied yet
+    axios.post(endPoint, {
+      id: id+1,
+      question: data.question,
+      answer: data.answer,
+      choiceDesc: data.choiceDesc     
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    });
   }
 
   const updateData = (id, data) => {
-    // setInfo(information.map(info => id === info.id ? { ...info, ...data } : info))
-    // axios.put(endPoint, {
-    //   id: id,
-    //   name: data.name,
-    //   time: data.time,
-    //   text: data.text     
-    // })
-    // .then(function (response) {
-    //   console.log(response)
-    // })
-    // .catch(function (error) {
-    //   console.log(error)
-    // })
+    setQuizData(quizData.map(info => id === info.id ? { ...info, ...data } : info))
+    axios.put(endPoint, {
+      id: id,
+      question: data.question,
+      answer: data.answer,
+      choiceDesc: data.choiceDesc    
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 
   const removeData = (id) => {
-    // setInfo(information.filter(info => info.id !== id))
-    // axios.delete(endPoint, 
-    // {
-    //   data: id
-    // })
-    // .then(function (response) {
-    //   console.log(response)
-    // })
-    // .catch(function (error) {
-    //   console.log(error)
-    // })
+    setQuizData(quizData.filter(info => info.id !== id))
+    axios.delete(endPoint, 
+    {
+      id: id
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   }
 
   if (loading) return <div>Now Loading...</div>
@@ -123,11 +126,12 @@ function App() {
       <div>
         <QuizForm addData={addData} />
       </div>
-      <QuizList>
-        data={quizData}
-        removeData={removeData}
-        updateData={updateData}
-      </QuizList>
+      {
+        quizData
+        ? <QuizList data={quizData} removeData={removeData} updateData={updateData}/>
+        : <p></p>
+      }
+      
     </div>
   ); 
 }
