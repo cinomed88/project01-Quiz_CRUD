@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/Back-End/node_modules
 /server/node_modules
 /.vscode
 /.pnp
@@ -25,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # config
-/Back-End/config.js
+/server/config.js
