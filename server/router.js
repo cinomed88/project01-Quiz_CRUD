@@ -88,7 +88,7 @@ router.put("/", (req,res) => {
         body += chunk.toString()
     }).on('end', () => {
         const bodyObj = JSON.parse(body)
-        console.log(bodyObj)
+        // console.log(bodyObj)
         db.getConnection((err, conn) => {
             if (err){
                 throw err
@@ -121,27 +121,25 @@ router.put("/", (req,res) => {
 
 router.delete("/", (req,res) => {
     console.log("routing to DELETE")
-    let body = ''
+    let deleteId = ''
     req.on('error', (err) => {
         console.error(err)
     }).on('data', chunk => {
-        body += chunk.toString()
+        deleteId += chunk.toString()
     }).on('end', () => {
-        const bodyObj = JSON.parse(body)
-        console.log(bodyObj.id)
         db.getConnection((err, conn) => {
             if (err){
                 throw err
             } else {
                 const deleteSql1 = "DELETE FROM choicet WHERE id_question = ?"
-                conn.query(deleteSql1, [ bodyObj.id ], (err, data) => {
+                conn.query(deleteSql1, [ deleteId ], (err, data) => {
                     if (err) {
                         console.log(`query error : ${err}`)
                         res.send(err)
                     }
                 })
                 const deleteSql2 = "DELETE FROM questiont WHERE id = ?";    
-                conn.query(deleteSql2, [ bodyObj.id ], function (err, data) {
+                conn.query(deleteSql2, [ deleteId ], function (err, data) {
                     if (err) {
                         console.log(`query error : ${err}`)
                         res.send(err)

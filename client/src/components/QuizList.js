@@ -2,14 +2,21 @@ import React from 'react';
 import Quiz from './Quiz';
 
 function QuizList(props) {
+    let i = 0;
     const list = props.data.map(
-        info => (
-        <Quiz
-          key={info.id} 
-          info={info} 
-          removeData={props.removeData}
-          updateData={props.updateData}
-        />)
+        info => {
+            i++;
+            return (
+            <div>
+                <h1>Question {i}</h1>
+                <Quiz
+                info={info} 
+                removeData={props.removeData}
+                updateData={props.updateData}
+                />
+            </div>
+            );
+        }
     );
 
     return(
@@ -17,6 +24,6 @@ function QuizList(props) {
         {list}
     </div>
     );
-}
+};
 
 export default QuizList;

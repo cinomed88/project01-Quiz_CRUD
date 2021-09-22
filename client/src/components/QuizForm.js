@@ -9,18 +9,18 @@ function QuizForm(props) {
         choice2: "",
         choice3: "",
         choice4: ""
-    })
-    const { question, answer, choice1, choice2, choice3, choice4 } = quiz
+    });
+    const { question, answer, choice1, choice2, choice3, choice4 } = quiz;
 
     const onChangeInput = (e) => {
         const { name, value } = e.target;
         setQuiz({ ...quiz, [name]: value });
-    }
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
-        props.addData({question: question, answer: answer, choiceDesc: [choice1, choice2, choice3, choice4]})
-        setQuiz({question: "", answer: "", choice1: "", choice2: "", choice3: "", choice4: ""})
-    } 
+        props.addData({question: question, answer: answer, choiceDesc: [choice1, choice2, choice3, choice4]});
+        setQuiz({question: "", answer: "", choice1: "", choice2: "", choice3: "", choice4: ""});
+    };
 
     return (
         <form onSubmit = {handleSubmit}>
@@ -63,6 +63,6 @@ function QuizForm(props) {
             <Button variant="contained" color="primary" size="medium" type="submit">Add</Button>
         </form>
     );
-}
+};
 
 export default QuizForm;
