@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Input, Box, TextareaAutosize } from "@material-ui/core";
+import { Button, ButtonGroup, Input, TextareaAutosize } from "@material-ui/core";
 
 function Quiz(props) {
     const [editable, setEditable] = useState(false);
@@ -32,6 +32,8 @@ function Quiz(props) {
             case 'choice4':
                 props.info.choiceDesc[3] = e.target.value;
                 break;
+            default:
+                
         }
         props.updateData(props.info.id, props.info);
     }    
