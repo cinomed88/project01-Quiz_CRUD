@@ -128,7 +128,7 @@ const Admin = () => {
         </div>
         {
           quizData
-          ? <QuizList data={quizData} removeData={removeData} updateData={updateData} editable={true} />
+          ? <QuizList data={quizData} removeData={removeData} updateData={updateData}/>
           : <div></div>
         }
         

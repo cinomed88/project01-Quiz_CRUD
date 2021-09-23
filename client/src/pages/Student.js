@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import QuizList from '../components/QuizList';
-import QuizScoring from '../components/QuizScoring';
-import { Button, Alert } from "@mui/material";
+import QuizForStud from '../components/QuizForStud';
 
 const Student = () => {
     const [quizData, setQuizData] = useState(null);
@@ -47,14 +45,6 @@ const Student = () => {
         return objData;
     };
 
-    const handleSubmit = () => {
-        let score = 0;
-        // for (let i=0; i < quizData.length; i++){
-        //     if (resultArr[i] == quizData[i].answer) score++;
-        // }
-        console.log(`Score : ${score} / ${quizData.length} (${score/quizData.length}%)`);
-    }
-
     if (loading) return <div>Now Loading...</div>;
     if (error) return <div>Error!</div>;
 
@@ -65,14 +55,9 @@ const Student = () => {
             </div>
             {
             quizData
-            ? <QuizList data={quizData} editable={false}/>
+            ? <QuizForStud data={quizData}/>
             : <div></div>
             }
-            <div style={{margin: 30}}>
-                <Button variant="outlined" onClick={handleSubmit}>
-                    Submit
-                </Button>
-            </div>
         </div>
     );
 }
