@@ -1,5 +1,5 @@
 # Project 01 - Quiz CRUD App (ver 2.0.0)
-(https://lucaswgong.com/portfolio/01/)
+ver 1.0.0 (https://lucaswgong.com/portfolio/01/)
  
  - This is a simple CRUD app. You can create quizzes on the Admin page and solve them on the Student page.
 
