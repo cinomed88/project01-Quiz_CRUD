@@ -1,7 +1,7 @@
-import QuizForm from '../components/QuizForm';
-import QuizList from '../components/QuizList';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import QuizForm from '../components/QuizForm';
+import QuizList from '../components/QuizList';
 
 const Admin = () => {
     const [id, setId] = useState(0);
@@ -52,7 +52,6 @@ const Admin = () => {
           setError(null);
           setLoading(true);
           const res = await axios.get(endPoint);
-          // console.log(res.data)
           setQuizData(dataToJson(res.data));
           // console.log(quizData)
           setId(findLastId(res.data));
@@ -129,7 +128,7 @@ const Admin = () => {
         </div>
         {
           quizData
-          ? <QuizList data={quizData} removeData={removeData} updateData={updateData}/>
+          ? <QuizList data={quizData} removeData={removeData} updateData={updateData} editable={true} />
           : <div></div>
         }
         

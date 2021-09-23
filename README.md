@@ -7,8 +7,9 @@
  
  ## Issue & Solution:
 
- - Slow initiation : Change the data retrieving structure, XMLHttpRequest -> Axios
- - Worse UX : 3 Pages -> SPA (use React)   (is Doing)
+ - Slow initiation : Changed the data retrieving structure, and XMLHttpRequest -> Axios
+ - Worse UX : 3 Pages -> SPA (used React, React-Router)
+ - It is difficult to collect data and deiver them to the upper component when making a scoring system.
 
  ## Future Work: 
- - Add Login function
+ - Add SignIn, SignUp function

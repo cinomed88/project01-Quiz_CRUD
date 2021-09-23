@@ -12,9 +12,9 @@ const NavBar = () => {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}
+                sx={{ mr: 1 }}
             >
-                <MenuIcon/>
+                <MenuIcon fontSize="large"/>
             </IconButton>
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 Quiz CRUD App

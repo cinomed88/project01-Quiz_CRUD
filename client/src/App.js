@@ -1,10 +1,10 @@
 import './App.css';
-import Home from './pages/Home'
-import Admin from './pages/Admin'
-import Student from './pages/Student'
-import SignUp from './pages/SignUp'
-import SignIn from './pages/SignIn'
 import { BrowserRouter, Switch, Route} from'react-router-dom';
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Student from './pages/Student';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
 import NavBar from './components/NavBar';
 
 function App() {

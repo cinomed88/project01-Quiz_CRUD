@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Input, TextareaAutosize } from "@material-ui/core";
+import { Button, ButtonGroup, Input, TextareaAutosize } from "@mui/material";
 
-function Quiz(props) {
+function QuizForAdmin(props) {
     const [editable, setEditable] = useState(false);
     const style = {
         border: '3px solid black',
@@ -9,6 +9,7 @@ function Quiz(props) {
         marginTop: '15px',
         width: "90%"
     };
+
     const handleToggleEdit = () => {
         setEditable(!editable);
     };
@@ -145,4 +146,4 @@ function Quiz(props) {
     }
 };
 
-export default Quiz;
+export default QuizForAdmin;
