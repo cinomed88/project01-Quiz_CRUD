@@ -16,9 +16,16 @@
 
  ## History
 
-- Sep 2021 - Ver 1.0.0
+### 1. Sep 2021 - Ver 1.0.0
 - (https://lucaswgong.com/portfolio/01/)
 - Feature: Users can create/edit/delete Quizzes and solve quiz and get score. Provide RESTful API, Node.js server and MySQL Database 
 - Skills used: HTML, CSS, JavaScript, Node.js, MySQL/MariaDB, Bootstrap
 - Issue: Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface) 
-- Screen Shot:
+
+- Admin Page
+
+![Admin Page (ver 1 0 0)](https://user-images.githubusercontent.com/45385949/134595623-8ae3c289-074b-4f90-83f3-fde225665de7.png)
+
+- Student Page
+
+![Student Page (ver 1 0 0)](https://user-images.githubusercontent.com/45385949/134595640-e2587775-9419-4b90-aab1-8d1dfe2a29f9.png)
