@@ -37,7 +37,7 @@ const QuizForAdmin = (props) => {
                         key = {index}  
                         value={index.toString()} 
                         control={<Radio color="primary"/>}
-                        style={{margin: 1}} 
+                        style={{margin: 2}} 
                         label={
                             <Input
                                 placeholder="Describe a choice."
@@ -52,22 +52,25 @@ const QuizForAdmin = (props) => {
         ); 
         return (
             <div style={style}>
-                <FormControl sx={{ m: 1 }} component="fieldset" variant="standard" style={{width: "calc(100% - 16px)"}}>
-                    <h3>
-                        <TextareaAutosize
-                            placeholder="Describe a question"                            
-                            name="question"
-                            value={props.data.question}
-                            onChange={handleUpdate}
-                            minRows={1}
-                            maxRows={5}
-                            style={{width: "calc(100% - 20px)", padding: 10, font: "inherit", fontSize: "inherit", fontWeight: "inherit"}}
-                        />
-                    </h3>
+                <h3>
+                    <TextareaAutosize
+                        placeholder="Describe a question"                            
+                        name="question"
+                        value={props.data.question}
+                        onChange={handleUpdate}
+                        minRows={1}
+                        maxRows={5}
+                        style={{width: "calc(100% - 20px)", padding: 10, font: "inherit", fontSize: "inherit", fontWeight: "inherit"}}
+                    />
+                </h3>
+                {/* <FormControl component="fieldset" variant="standard" style={{width: "calc(100% - 20px)"}}>
                     <RadioGroup name="answer" value={props.data.answer} onChange={handleUpdate}>
                         {list}
                     </RadioGroup>
-                </FormControl>
+                </FormControl> */}
+                <RadioGroup name="answer" value={props.data.answer} onChange={handleUpdate}>
+                        {list}
+                </RadioGroup>
                 <div style={{margin:10}}>
                     <ButtonGroup color="primary" aria-label="text primary button group">
                         <Button variant="outlined" color="primary" size="small" onClick={handleToggleEdit} >Apply</Button>
@@ -82,14 +85,14 @@ const QuizForAdmin = (props) => {
             choice => {
                 index++;
                 if (choice) 
-                    return <FormControlLabel key={index} value={index.toString()} control={<Radio color="primary"/>} label={choice} style={{margin: 1}}/>;
+                    return <FormControlLabel key={index} value={index.toString()} control={<Radio color="primary"/>} label={choice} style={{margin: 2}}/>;
                 else return null;
             }
         ); 
         return (
             <div style={style}>
+                <h3 style={{width: "calc(100% - 20px)", padding: 10}}>{props.data.question}</h3>
                 <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
-                    <h3>{props.data.question}</h3>
                     <RadioGroup value={props.data.answer}>
                         {list}
                     </RadioGroup>

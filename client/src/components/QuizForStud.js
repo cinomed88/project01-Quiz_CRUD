@@ -22,10 +22,9 @@ const QuizForStud = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (choice)
-            finalChoices.push(Number(choice))
+            setFinalChoices([...finalChoices, Number(choice)])
         else
-            finalChoices.push(0)
-            
+            finalChoices.push(0)   
         setCurrent(current+1);
         setChoice('');       
         if (current === props.data.length - 1)
