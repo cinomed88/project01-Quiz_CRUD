@@ -6,18 +6,18 @@ const NavBarBtn = (props) => {
         fontWeight: "bold",
         color: "white",
         textDecorationLine: "none"
-    }
+    };
     const activeBtnStyle = {
         fontWeight: "bold",
         color: "white",
         textDecorationLine: "none"
-    }
+    };
     return (
         <Button color="inherit">
             <NavLink to={props.to} style={btnStyle} activeStyle={activeBtnStyle}>
                 {props.value}
             </NavLink>
         </Button>
-    )
-}
+    );
+};
 export default NavBarBtn;

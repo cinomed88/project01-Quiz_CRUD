@@ -18,9 +18,9 @@ const Student = () => {
                 setQuizData(dataToJson(res.data));
             } catch (e) {
                 setError(e);
-            }
+            };
             setLoading(false);
-        }
+        };
         fetchInfo();
     }, []);
 
@@ -33,11 +33,11 @@ const Student = () => {
         for (let item of idSet){
             const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
             for (let k=0; k < data.length; k++){
-            if (data[k].id === item){
-                if (!tempObj.question) tempObj.question = data[k].question;
-                if (!tempObj.answer) tempObj.answer = data[k].answer;
-                tempObj.choiceDesc[data[k].choice-1] = data[k].description;
-            }
+                if (data[k].id === item){
+                    if (!tempObj.question) tempObj.question = data[k].question;
+                    if (!tempObj.answer) tempObj.answer = data[k].answer;
+                    tempObj.choiceDesc[data[k].choice-1] = data[k].description;
+                };
             };
             objData.push(tempObj); 
         };
@@ -59,6 +59,5 @@ const Student = () => {
             }
         </div>
     );
-}
-
+};
 export default Student;

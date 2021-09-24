@@ -1,13 +1,13 @@
 import QuizForAdmin from './QuizForAdmin';
 
 function QuizList(props) {
-    let i = 0;
+    let index = 0;
     const list = props.data.map(
         data => {
-            i++;
+            index++;
             return (
-            <div>
-                <h1 style={{textAlign: "center", marginBottom: 10}}>Question {i}</h1>
+            <div key={index}>
+                <h1 style={{textAlign: "center", marginBottom: 10}}>Question {index}</h1>
                 <QuizForAdmin data={data} removeData={props.removeData} updateData={props.updateData} />
             </div>
             );

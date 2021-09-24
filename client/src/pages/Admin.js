@@ -11,128 +11,123 @@ const Admin = () => {
     // const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
     const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
     const style = {
-      padding: '1px',
-      margin: '15px'
+        padding: '1px',
+        margin: '15px'
     };
   
     const findLastId = (data) => {
-      let lastId = -1;
-      let i = 0;
-      while (data[i]){
-        if (data[i].id > lastId){
-          lastId = data[i].id;
+        let lastId = -1;
+        let i = 0;
+        while (data[i]){
+            if (data[i].id > lastId){
+                lastId = data[i].id;
+            }
+            i++;
         }
-        i++;
-      }
-      return lastId;
+        return lastId;
     };
     const dataToJson = (data) => {
-      let objData = [];
-      const idSet = new Set();
-      for (let i=0; i < data.length; i++){
-        idSet.add(data[i].id);
-      };
-      for (let item of idSet){
-        const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
-        for (let k=0; k < data.length; k++){
-          if (data[k].id === item){
-            if (!tempObj.question) tempObj.question = data[k].question;
-            if (!tempObj.answer) tempObj.answer = data[k].answer;
-            tempObj.choiceDesc[data[k].choice-1] = data[k].description;
-          }
+        let objData = [];
+        const idSet = new Set();
+        for (let i=0; i < data.length; i++){
+            idSet.add(data[i].id);
         };
-        objData.push(tempObj); 
-      };
-      return objData;
+        for (let item of idSet){
+            const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
+            for (let k=0; k < data.length; k++){
+                if (data[k].id === item){
+                    if (!tempObj.question) tempObj.question = data[k].question;
+                    if (!tempObj.answer) tempObj.answer = data[k].answer;
+                    tempObj.choiceDesc[data[k].choice-1] = data[k].description;
+                }
+            };
+            objData.push(tempObj); 
+        };
+        return objData;
     };
   
     useEffect(() => {
-      const fetchInfo = async () => {
-        try {
-          setError(null);
-          setLoading(true);
-          const res = await axios.get(endPoint);
-          setQuizData(dataToJson(res.data));
-          // console.log(quizData)
-          setId(findLastId(res.data));
-          // console.log(id)
-        } catch (e) {
-          setError(e);
+        const fetchInfo = async () => {
+            try {
+                setError(null);
+                setLoading(true);
+                const res = await axios.get(endPoint);
+                setQuizData(dataToJson(res.data));
+                setId(findLastId(res.data));
+            } catch (e) {
+                setError(e);
+            }
+            setLoading(false);
         }
-        setLoading(false);
-      }
-      fetchInfo();
+        fetchInfo();
     }, []);
   
     const addData = (data) => {
-      if (!data) console.log("data was not input yet.");
-  
-      setQuizData(quizData.concat({ id: id+1, ...data }));
-      console.log(quizData); // Not applied yet
-      setId(id+1);
-      console.log(id); // Not applied yet
-      axios.post(endPoint, {
-        id: id+1,
-        question: data.question,
-        answer: data.answer,
-        choiceDesc: data.choiceDesc     
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        if (!data) console.log("data was not input yet.");
+    
+        setQuizData(quizData.concat({ id: id+1, ...data }));
+        setId(id+1);
+        axios.post(endPoint, {
+            id: id+1,
+            question: data.question,
+            answer: data.answer,
+            choiceDesc: data.choiceDesc     
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     };
   
     const updateData = (id, data) => {
-      setQuizData(quizData.map(info => id === info.id ? { ...info, ...data } : info));
-      axios.put(endPoint, {
-        id: id,
-        question: data.question,
-        answer: data.answer,
-        choiceDesc: data.choiceDesc    
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        setQuizData(quizData.map(info => id === info.id ? { ...info, ...data } : info));
+        axios.put(endPoint, {
+            id: id,
+            question: data.question,
+            answer: data.answer,
+            choiceDesc: data.choiceDesc    
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     };
   
     const removeData = (id) => {
-      setQuizData(quizData.filter(info => info.id !== id));
-      axios.delete(endPoint, 
-      {
-        data: id
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        setQuizData(quizData.filter(info => info.id !== id));
+        axios.delete(endPoint, 
+        {
+            data: id
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     };
   
     if (loading) return <div>Now Loading...</div>;
     if (error) return <div>Error!</div>;
   
     return (
-      <div className="App" style = {style}>
-        <div>
-            <h1>Admin Page</h1>
+        <div className="App" style = {style}>
+            <div>
+                <h1>Admin Page</h1>
+            </div>
+            <div>
+                <QuizForm addData={addData} />
+            </div>
+            {
+                quizData
+                ? <QuizList data={quizData} removeData={removeData} updateData={updateData}/>
+                : <div></div>
+            }
         </div>
-        <div>
-          <QuizForm addData={addData} />
-        </div>
-        {
-          quizData
-          ? <QuizList data={quizData} removeData={removeData} updateData={updateData}/>
-          : <div></div>
-        }
-        
-      </div>
     ); 
-}
+};
 export default Admin;

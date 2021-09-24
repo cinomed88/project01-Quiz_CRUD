@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Button, Input } from "@material-ui/core"
+import { useState } from 'react';
+import { Button, Input } from "@material-ui/core";
 
-function QuizForm(props) {
+const QuizForm = (props) => {
     const [quiz, setQuiz] = useState({
         question: "",
         answer: "",

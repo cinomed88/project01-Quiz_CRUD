@@ -1,6 +1,6 @@
 import { AppBar, Box, Toolbar, IconButton, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import NavBarBtn from './NavBarBtn'
+import NavBarBtn from './NavBarBtn';
 
 const NavBar = () => {
     return (
@@ -28,5 +28,5 @@ const NavBar = () => {
     </AppBar>
     </Box>
     );
-}
+};
 export default NavBar;

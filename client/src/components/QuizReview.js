@@ -3,9 +3,9 @@ const QuizReview = (props) => {
         let result = 0;
         for (let i = 0; i < data.length; i++) {
             if (data[i].answer === choices[i]) result++;
-        }
+        };
         return result;
-    }
+    };
     const score = calcScore(props.data, props.choices);
 
     return (

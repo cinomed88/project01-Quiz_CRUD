@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, ButtonGroup, Input, TextareaAutosize, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 
 const QuizForAdmin = (props) => {
@@ -15,113 +15,74 @@ const QuizForAdmin = (props) => {
         setEditable(!editable);
     };
     const handleUpdate = (e) => {
-        switch (e.target.name){
-            case 'question': 
-                props.data.question = e.target.value;
-                break;
-            case 'answer':
-                props.data.answer = e.target.value;
-                break;
-            case 'choice1':
-                props.data.choiceDesc[0] = e.target.value;
-                break;
-            case 'choice2':
-                props.data.choiceDesc[1] = e.target.value;
-                break;
-            case 'choice3':
-                props.data.choiceDesc[2] = e.target.value;
-                break;
-            case 'choice4':
-                props.data.choiceDesc[3] = e.target.value;
-                break;
-            default:
-                
+        if (e.target.name[0] === 'c') {
+            props.data.choiceDesc[e.target.name[e.target.name.length-1]-1] = e.target.value;
+        } else {
+            props.data[e.target.name] = e.target.value;
         }
         props.updateData(props.data.id, props.data);
-    }    
+    };
+
     const handleRemove = () => {
         props.removeData(props.data.id);
-    }
+    };
 
     if (editable) {
+        let index = 0;
+        const list =  props.data.choiceDesc.map(
+            choice => {
+                index++;
+                return (
+                    <FormControlLabel
+                        key = {index}  
+                        value={index.toString()} 
+                        control={<Radio color="primary"/>}
+                        style={{margin: 1}} 
+                        label={
+                            <Input
+                                placeholder="Describe a choice."
+                                name={`choice${index}`}
+                                value={choice}
+                                onChange={handleUpdate}
+                            />
+                        } 
+                    />
+                );
+            }
+        ); 
         return (
             <div style={style}>
-                <div>
-                    <TextareaAutosize
-                        aria-label= "question"
-                        placeholder="Describe a question"
-                        minRows={3}
-                        maxRows={5}
-                        style={{width: 400}}
-                        onChange={handleUpdate}
-                        value={props.data.question}
-                        name="question"
-                    />
-                </div>
-                <div>
-                    <Input 
-                        placeholder="Answer"
-                        onChange={handleUpdate}
-                        value={props.data.answer}
-                        name="answer"
-                    />
-                </div>
-                <div>
-                    <TextareaAutosize
-                        minRows={1}
-                        maxRows={2}
-                        style={{width: 400}}
-                        onChange={handleUpdate}
-                        value={props.data.choiceDesc[0]}
-                        name="choice1"
-                    />
-                </div>
-                <div>
-                    <TextareaAutosize
-                        minRows={1}
-                        maxRows={2}
-                        style={{width: 400}}
-                        onChange={handleUpdate}
-                        value={props.data.choiceDesc[1]}
-                        name="choice2"
-                    />
-                </div>
-                <div>
-                    <TextareaAutosize
-                        minRows={1}
-                        maxRows={2}
-                        style={{width: 400}}
-                        onChange={handleUpdate}
-                        value={props.data.choiceDesc[2]}
-                        name="choice3"
-                    />
-                </div>
-                <div>
-                    <TextareaAutosize
-                        minRows={1}
-                        maxRows={2}
-                        style={{width: 400}}
-                        onChange={handleUpdate}
-                        value={props.data.choiceDesc[3]}
-                        name="choice4"
-                    />
-                </div>
-                <div>
-                    <ButtonGroup variant="contained" color="primary" aria-label="text primary button group">
+                <FormControl sx={{ m: 1 }} component="fieldset" variant="standard" style={{width: "calc(100% - 16px)"}}>
+                    <h3>
+                        <TextareaAutosize
+                            placeholder="Describe a question"                            
+                            name="question"
+                            value={props.data.question}
+                            onChange={handleUpdate}
+                            minRows={1}
+                            maxRows={5}
+                            style={{width: "calc(100% - 20px)", padding: 10, font: "inherit", fontSize: "inherit", fontWeight: "inherit"}}
+                        />
+                    </h3>
+                    <RadioGroup name="answer" value={props.data.answer} onChange={handleUpdate}>
+                        {list}
+                    </RadioGroup>
+                </FormControl>
+                <div style={{margin:10}}>
+                    <ButtonGroup color="primary" aria-label="text primary button group">
                         <Button variant="outlined" color="primary" size="small" onClick={handleToggleEdit} >Apply</Button>
                         <Button variant="outlined" color="secondary" size="small" onClick={handleRemove} >Remove</Button>
                     </ButtonGroup>
-                </div>
-                
+                </div>                
             </div>
-        )
+        );
     } else {
         let index = 0;
         const list =  props.data.choiceDesc.map(
             choice => {
                 index++;
                 if (choice) 
-                    return (<FormControlLabel value={index.toString()} control={<Radio color="primary"/>} label={choice} style={{margin: 1}}/>);
+                    return <FormControlLabel key={index} value={index.toString()} control={<Radio color="primary"/>} label={choice} style={{margin: 1}}/>;
                 else return null;
             }
         ); 
@@ -142,7 +103,6 @@ const QuizForAdmin = (props) => {
                 </div>
             </div>
         );
-    }
+    };
 };
-
 export default QuizForAdmin;

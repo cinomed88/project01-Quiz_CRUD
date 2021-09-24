@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
-import QuizReview from "./QuizReview"
+import QuizReview from "./QuizReview";
 
 const QuizForStud = (props) => {
     const style = {
@@ -17,7 +17,7 @@ const QuizForStud = (props) => {
 
     const handleRadioChange = (e) => {
         setChoice(e.target.value);
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -68,8 +68,5 @@ const QuizForStud = (props) => {
     } else {
         return <QuizReview data = {props.data} choices = {finalChoices}/>;
     };
-
-
 };
-
 export default QuizForStud;
