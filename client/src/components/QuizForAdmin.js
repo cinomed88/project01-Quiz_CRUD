@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Button, ButtonGroup, Input, TextareaAutosize } from "@mui/material";
+import { Button, ButtonGroup, Input, TextareaAutosize, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 
 const QuizForAdmin = (props) => {
     const [editable, setEditable] = useState(false);
     const style = {
+        textAlign: 'left',
         border: '3px solid black',
         padding: '10px',
-        marginTop: '15px',
-        width: "90%"
+        margin: '0px 15px 0px 15px',
+        width: "calc(100%-30px)"
     };
 
     const handleToggleEdit = () => {
@@ -16,30 +17,30 @@ const QuizForAdmin = (props) => {
     const handleUpdate = (e) => {
         switch (e.target.name){
             case 'question': 
-                props.info.question = e.target.value;
+                props.data.question = e.target.value;
                 break;
             case 'answer':
-                props.info.answer = e.target.value;
+                props.data.answer = e.target.value;
                 break;
             case 'choice1':
-                props.info.choiceDesc[0] = e.target.value;
+                props.data.choiceDesc[0] = e.target.value;
                 break;
             case 'choice2':
-                props.info.choiceDesc[1] = e.target.value;
+                props.data.choiceDesc[1] = e.target.value;
                 break;
             case 'choice3':
-                props.info.choiceDesc[2] = e.target.value;
+                props.data.choiceDesc[2] = e.target.value;
                 break;
             case 'choice4':
-                props.info.choiceDesc[3] = e.target.value;
+                props.data.choiceDesc[3] = e.target.value;
                 break;
             default:
                 
         }
-        props.updateData(props.info.id, props.info);
+        props.updateData(props.data.id, props.data);
     }    
     const handleRemove = () => {
-        props.removeData(props.info.id);
+        props.removeData(props.data.id);
     }
 
     if (editable) {
@@ -53,7 +54,7 @@ const QuizForAdmin = (props) => {
                         maxRows={5}
                         style={{width: 400}}
                         onChange={handleUpdate}
-                        value={props.info.question}
+                        value={props.data.question}
                         name="question"
                     />
                 </div>
@@ -61,7 +62,7 @@ const QuizForAdmin = (props) => {
                     <Input 
                         placeholder="Answer"
                         onChange={handleUpdate}
-                        value={props.info.answer}
+                        value={props.data.answer}
                         name="answer"
                     />
                 </div>
@@ -71,7 +72,7 @@ const QuizForAdmin = (props) => {
                         maxRows={2}
                         style={{width: 400}}
                         onChange={handleUpdate}
-                        value={props.info.choiceDesc[0]}
+                        value={props.data.choiceDesc[0]}
                         name="choice1"
                     />
                 </div>
@@ -81,7 +82,7 @@ const QuizForAdmin = (props) => {
                         maxRows={2}
                         style={{width: 400}}
                         onChange={handleUpdate}
-                        value={props.info.choiceDesc[1]}
+                        value={props.data.choiceDesc[1]}
                         name="choice2"
                     />
                 </div>
@@ -91,7 +92,7 @@ const QuizForAdmin = (props) => {
                         maxRows={2}
                         style={{width: 400}}
                         onChange={handleUpdate}
-                        value={props.info.choiceDesc[2]}
+                        value={props.data.choiceDesc[2]}
                         name="choice3"
                     />
                 </div>
@@ -101,7 +102,7 @@ const QuizForAdmin = (props) => {
                         maxRows={2}
                         style={{width: 400}}
                         onChange={handleUpdate}
-                        value={props.info.choiceDesc[3]}
+                        value={props.data.choiceDesc[3]}
                         name="choice4"
                     />
                 </div>
@@ -115,30 +116,28 @@ const QuizForAdmin = (props) => {
             </div>
         )
     } else {
+        let index = 0;
+        const list =  props.data.choiceDesc.map(
+            choice => {
+                index++;
+                if (choice) 
+                    return (<FormControlLabel value={index.toString()} control={<Radio color="primary"/>} label={choice} style={{margin: 1}}/>);
+                else return null;
+            }
+        ); 
         return (
             <div style={style}>
-                <div>
-                    {props.info.question}
-                </div>
-                <div>
-                    {props.info.answer}
-                </div>
-                <div>
-                    {props.info.choiceDesc[0]}
-                </div>
-                <div>
-                    {props.info.choiceDesc[1]}
-                </div>
-                <div>
-                    {props.info.choiceDesc[2]}
-                </div>
-                <div>
-                    {props.info.choiceDesc[3]}
-                </div>
-                <div>
+                <FormControl sx={{ m: 1 }} component="fieldset" variant="standard">
+                    <h3>{props.data.question}</h3>
+                    <RadioGroup value={props.data.answer}>
+                        {list}
+                    </RadioGroup>
+                </FormControl>
+
+                <div style={{margin:10}}>
                     <ButtonGroup variant="contained" color="primary" aria-label="text primary button group">
-                        <Button color="primary" size="small" onClick={handleToggleEdit}>Edit</Button>
-                        <Button color="secondary" size="small" onClick={handleRemove}>Remove</Button>
+                        <Button color="primary" size="small" style={{fontWeight:"bolder"}} onClick={handleToggleEdit}>Edit</Button>
+                        <Button color="secondary" size="small" style={{fontWeight:"bolder"}} onClick={handleRemove}>Remove</Button>
                     </ButtonGroup>
                 </div>
             </div>

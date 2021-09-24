@@ -3,12 +3,12 @@ import QuizForAdmin from './QuizForAdmin';
 function QuizList(props) {
     let i = 0;
     const list = props.data.map(
-        info => {
+        data => {
             i++;
             return (
             <div>
-                <h1 style={{textAlign: "left", marginLeft: "5px"}}>Question {i}</h1>
-                <QuizForAdmin info={info} removeData={props.removeData} updateData={props.updateData} />
+                <h1 style={{textAlign: "center", marginBottom: 10}}>Question {i}</h1>
+                <QuizForAdmin data={data} removeData={props.removeData} updateData={props.updateData} />
             </div>
             );
         }
