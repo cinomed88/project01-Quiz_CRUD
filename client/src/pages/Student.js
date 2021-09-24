@@ -16,7 +16,6 @@ const Student = () => {
                 setLoading(true);
                 const res = await axios.get(endPoint);
                 setQuizData(dataToJson(res.data));
-                // console.log(quizData)
             } catch (e) {
                 setError(e);
             }

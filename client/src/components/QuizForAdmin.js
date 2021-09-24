@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, Input, TextareaAutosize } from "@mui/material";
 
-function QuizForAdmin(props) {
+const QuizForAdmin = (props) => {
     const [editable, setEditable] = useState(false);
     const style = {
         border: '3px solid black',

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import QuizForAdmin from './QuizForAdmin';
 
 function QuizList(props) {
