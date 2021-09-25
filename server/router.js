@@ -14,8 +14,8 @@ router.get("/", (req, res) => {
                 console.error(err);
             }) 
             const getSql = "SELECT q.id, q.question, q.answer, c.choice, c.description\
-                            FROM questiont AS q\
-                            RIGHT JOIN choicet AS c\
+                            FROM Questions AS q\
+                            RIGHT JOIN Choices AS c\
                             ON q.id = c.id_question";
             conn.query(getSql, (err, data) => {
                 if (!err) {
@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
                 res.on('error', (err) => {
                 console.error(err);
                 });
-                const postSql1 = `INSERT INTO questiont \
+                const postSql1 = `INSERT INTO Questions \
                                     (id, question, answer) VALUES (?,?,?)`;
                 conn.query(postSql1, [ bodyObj.id, bodyObj.question, bodyObj.answer ], (err, data) => {
                     if (err) {
@@ -62,7 +62,7 @@ router.post("/", (req, res) => {
                 for (let i=0; i < bodyObj.choiceDesc.length; i++){
                     if(!bodyObj.choiceDesc[i]) break;
 
-                    const postSql2 = `INSERT INTO choicet \
+                    const postSql2 = `INSERT INTO Choices \
                                         (id_question, choice, description) VALUES (?,?,?)`;
                     conn.query(postSql2, [ bodyObj.id, (i+1), bodyObj.choiceDesc[i] ], (err, data) => {
                         if (err) {
@@ -95,7 +95,7 @@ router.put("/", (req,res) => {
             if (err){
                 throw err;
             } else {
-                const putSql1 = "UPDATE questiont SET question = ?, answer = ? WHERE id = ?";
+                const putSql1 = "UPDATE Questions SET question = ?, answer = ? WHERE id = ?";
                 conn.query(putSql1, [ bodyObj.question, bodyObj.answer, bodyObj.id ], (err, data) => {
                     if (err) {
                         console.log(`query error : ${err}`);
@@ -103,7 +103,7 @@ router.put("/", (req,res) => {
                     };
                 })
                 for (let i=0; i < bodyObj.choiceDesc.length; i++){
-                    const putSql2 = "UPDATE choicet SET description = ? WHERE id_question = ? AND choice = ?";    
+                    const putSql2 = "UPDATE Choices SET description = ? WHERE id_question = ? AND choice = ?";    
                     conn.query(putSql2, [ bodyObj.choiceDesc[i], bodyObj.id, (i+1) ], function (err, data) {
                         if (err) {
                             console.log(`query error : ${err}`);
@@ -133,14 +133,14 @@ router.delete("/", (req,res) => {
             if (err){
                 throw err;
             } else {
-                const deleteSql1 = "DELETE FROM choicet WHERE id_question = ?";
+                const deleteSql1 = "DELETE FROM Choices WHERE id_question = ?";
                 conn.query(deleteSql1, [ deleteId ], (err, data) => {
                     if (err) {
                         console.log(`query error : ${err}`);
                         res.send(err);
                     };
                 });
-                const deleteSql2 = "DELETE FROM questiont WHERE id = ?";    
+                const deleteSql2 = "DELETE FROM Questions WHERE id = ?";    
                 conn.query(deleteSql2, [ deleteId ], function (err, data) {
                     if (err) {
                         console.log(`query error : ${err}`);
