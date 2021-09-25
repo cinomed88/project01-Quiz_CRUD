@@ -7,10 +7,11 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
 
+const endPoint = "/portfolio/01"
 function App() {
     return (      
-        <BrowserRouter>
-            <NavBar/>
+        <BrowserRouter basename={endPoint}>
+            <NavBar />
             <Switch>
                 <Route path = "/" exact component = {Home}/>                
                 <Route path = "/admin" component = {Admin}/>

@@ -6,8 +6,8 @@ const Student = () => {
     const [quizData, setQuizData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    // const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
-    const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
+    const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
+    // const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
 
     useEffect(() => {
         const fetchInfo = async () => {

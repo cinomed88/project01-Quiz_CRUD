@@ -19,11 +19,11 @@ const NavBar = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
                 Quiz CRUD App
             </Typography>
-            <NavBarBtn to='/' value="Home"/>
-            <NavBarBtn to='/admin' value="Admin"/>
-            <NavBarBtn to='/student' value="Student"/>
-            <NavBarBtn to='/signin' value="Signin"/>
-            <NavBarBtn to='/signup' value="Signup"/>
+            <NavBarBtn to="/" value="Home"/>
+            <NavBarBtn to="/admin" value="Admin"/>
+            <NavBarBtn to="/student" value="Student"/>
+            <NavBarBtn to="/signup" value="Signin"/>
+            <NavBarBtn to="/signin" value="Signup"/>
         </Toolbar>
     </AppBar>
     </Box>

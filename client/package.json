@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "https://lucaswgong.com/portfolio/01",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
