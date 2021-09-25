@@ -7,7 +7,7 @@
  ## Issue & Solution:
 
  - Little Slow initiation : Changed the data retrieving structure, and XMLHttpRequest -> Axios
- - Worse UX : 3 Pages -> SPA (used React, React-Router)
+ - Worse UX : 3 Pages -> SPA (used React, React Router)
  - It is difficult to collect data and deiver them to the upper component when making a scoring system.
 
  ## Future Work: 
@@ -18,9 +18,9 @@
 
 ### 1. Ver 1.0.0 - Sep 2021
 - (https://lucaswgong.com/portfolio/01/)
-- Skills used: HTML, CSS, JavaScript, Node.js, MySQL/MariaDB, Bootstrap
-- Feature: Users can create/edit/delete Quizzes and solve quiz and get score. Provide RESTful API, Node.js server and MySQL Database 
-- Issue: Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface) 
+- Skills used: HTML, CSS, JavaScript, Node.js, MySQL/MariaDB, Bootstrap.
+- Feature: Users can create/edit/delete a quiz, solve the quiz, and get score. Provide REST API, Node.js server and MySQL Database. 
+- Issue: Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface).
 
 - Admin Page
 

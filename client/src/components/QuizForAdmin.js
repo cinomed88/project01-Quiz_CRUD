@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button, ButtonGroup, Input, TextareaAutosize, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 
 const QuizForAdmin = (props) => {
@@ -8,7 +8,7 @@ const QuizForAdmin = (props) => {
         border: '3px solid black',
         padding: '10px',
         margin: '0px 15px 0px 15px',
-        width: "calc(100%-30px)"
+        width: 'calc(100%-30px)'
     };
 
     const handleToggleEdit = () => {
@@ -63,11 +63,6 @@ const QuizForAdmin = (props) => {
                         style={{width: "calc(100% - 20px)", padding: 10, font: "inherit", fontSize: "inherit", fontWeight: "inherit"}}
                     />
                 </h3>
-                {/* <FormControl component="fieldset" variant="standard" style={{width: "calc(100% - 20px)"}}>
-                    <RadioGroup name="answer" value={props.data.answer} onChange={handleUpdate}>
-                        {list}
-                    </RadioGroup>
-                </FormControl> */}
                 <RadioGroup name="answer" value={props.data.answer} onChange={handleUpdate}>
                         {list}
                 </RadioGroup>

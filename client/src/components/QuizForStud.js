@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 import QuizReview from "./QuizReview";
 
 const QuizForStud = (props) => {
     const style = {
-        textAlign: "left",
+        textAlign: 'left',
         border: '3px solid black',
         padding: '10px',
         marginTop: '15px',

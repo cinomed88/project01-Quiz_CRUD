@@ -1,5 +1,5 @@
-import { NavLink } from'react-router-dom';
-import { Button } from '@mui/material';
+import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const NavBarBtn = (props) => {
     const btnStyle = {

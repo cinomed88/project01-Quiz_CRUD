@@ -4,11 +4,15 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lucas Gong",
   "license": "",
   "dependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1"

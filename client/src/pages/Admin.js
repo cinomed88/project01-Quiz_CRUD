@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import QuizForm from '../components/QuizForm';
-import QuizList from '../components/QuizList';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import QuizForm from "../components/QuizForm";
+import QuizList from "../components/QuizList";
 
 const Admin = () => {
     const [id, setId] = useState(0);

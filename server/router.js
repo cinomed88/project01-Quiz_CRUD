@@ -1,6 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const db = require("./config");
+'use strict'
+import { Router } from "express";
+import db from "./config";
+
+const router = Router();
 
 router.get("/", (req, res) => {
     console.log("routing to GET");
@@ -154,4 +156,4 @@ router.delete("/", (req,res) => {
     });
     res.end("DELETE request processed.");   
 });
-module.exports = router;
+export default router;

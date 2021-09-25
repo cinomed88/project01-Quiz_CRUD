@@ -1,4 +1,4 @@
-import QuizForAdmin from './QuizForAdmin';
+import QuizForAdmin from "./QuizForAdmin";
 
 function QuizList(props) {
     let index = 0;

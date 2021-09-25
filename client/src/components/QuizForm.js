@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button, Input, TextareaAutosize, FormControl, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { useState } from "react";
+import { Button, Input, TextareaAutosize, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 
 const QuizForm = (props) => {
     const style = {
@@ -7,9 +7,9 @@ const QuizForm = (props) => {
         border: '3px solid black',
         padding: '10px',
         margin: '0px 15px 0px 15px',
-        width: "calc(100%-30px)"
+        width: 'calc(100%-30px)'
     };
-    const [quiz, setQuiz] = useState({question: "", answer: 0, c1:"", c2:"", c3:"", c4:""});
+    const [quiz, setQuiz] = useState({question: '', answer: 0, c1:'', c2:'', c3:'', c4:''});
     const { question, answer, c1, c2, c3, c4 } = quiz;
 
 
@@ -21,7 +21,7 @@ const QuizForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.addData({question: question, answer: answer, choiceDesc: [c1, c2, c3, c4]});
-        setQuiz({question: "", answer: "", c1:"", c2:"", c3:"", c4:""});
+        setQuiz({question: '', answer: '', c1:'', c2:'', c3:'', c4:''});
     };
 
     return (        
