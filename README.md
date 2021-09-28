@@ -2,28 +2,43 @@
 
  (https://lucaswgong.com/portfolio/01/)
 
- - This is a simple CRUD app. You can create quizzes on the Admin page and solve them on the Student page.
-
- ## Skills used : HTML, CSS, JavaScript, React, Node.js, MySQL/MariaDB, Material-UI
+ - Developed an online quiz app using React on the client side and provided CRUD API on the server side.
+ - Built the React app using Axios to send HTTP requests, React Router for routing, and Hooks API to handle states.
+ - Built CRUD API server using Node.js and Express.js, and database using MySQL.
+ - Deployed in a web hosting server using cPanel.
  
- ## Issue & Solution:
+ 
+ ## Skills used : React, Node.js, Express.js, MySQL, Material-UI
+ 
+ 
+ ## Issues Solved:
 
- - Little Slow initiation : Changed the data retrieving structure, and XMLHttpRequest -> Axios
- - Worse UX : 3 Pages -> SPA (used React, React Router)
- - It is difficult to collect data and deiver them to the upper component when making a scoring system.
- - Wrong address hosting on router -> add 'basename' prop on 'BrowserRouter'   
- - 'refresh' cannot find a proper page, 404 error -> add .htaccess file with a redirect option (Apache Server)
+ - Little Slow initiation -> Changed the data retrieving structure, and used Axios instead of XMLHttpRequest
+ - Worse UX (3 Pages) -> Used React and React Router (SPA)
+ - Wrong address hosting on router -> added 'basename' prop on 'BrowserRouter'   
+ - 'refresh' cannot find a proper page, 404 error -> added .htaccess file with redirect option (Apache Server)
+ 
+ 
+ ## In Progress Issues & Promising Solutions:
+ 
+ - Difficult to collect data and deliver them to the upper component when making a scoring system -> Apply Context API
+ - Ambiguous data type (hard to debug) -> Use TypeScript
+ - Can't cover various screen sizes and resolutions -> Implement more detailed responsible design
+ - Worse SEO -> Apply Next.js
+
 
  ## Future Work: 
  
  - Add SignIn, SignUp function
+ - More detailed exception handling (Especially in data communication)
+
 
  ## History
 
 ### 1. Ver 1.0.0 - Sep 2021
 - Skills used: HTML, CSS, JavaScript, Node.js, MySQL/MariaDB, Bootstrap.
-- Feature: Users can create/edit/delete a quiz, solve the quiz, and get score. Provide REST API, Node.js server and MySQL Database. 
-- Issue: Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface).
+- Feature: Users are able to read/create/edit/delete a quiz, solve the quiz, and get score. Provide REST API, Node.js server and MySQL Database. 
+- Issues: Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface).
 
 - Admin Page
 
