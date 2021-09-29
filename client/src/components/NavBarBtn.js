@@ -8,7 +8,7 @@ const NavBarBtn = (props) => {
         textDecorationLine: "none"
     };
     const activeBtnStyle = {
-        fontWeight: "bold",
+        fontWeight: "bolder",
         color: "white",
         textDecorationLine: "none"
     };

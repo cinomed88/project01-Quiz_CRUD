@@ -22,8 +22,8 @@ const NavBar = () => {
             <NavBarBtn to="/" value="Home"/>
             <NavBarBtn to="/admin" value="Admin"/>
             <NavBarBtn to="/student" value="Student"/>
-            <NavBarBtn to="/signup" value="Signin"/>
-            <NavBarBtn to="/signin" value="Signup"/>
+            <NavBarBtn to="/signin" value="SignIn"/>
+            <NavBarBtn to="/signup" value="SignUp"/>
         </Toolbar>
     </AppBar>
     </Box>

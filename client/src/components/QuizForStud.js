@@ -38,6 +38,7 @@ const QuizForStud = (props) => {
                 index++;
                 if (choice) return (
                     <FormControlLabel 
+                        key={index}
                         value={index.toString()} 
                         control={<Radio color="primary"/>} 
                         label={choice}

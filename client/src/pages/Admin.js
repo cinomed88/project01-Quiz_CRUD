@@ -2,36 +2,46 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import QuizForm from "../components/QuizForm";
 import QuizList from "../components/QuizList";
+import { endPoint } from "../App";
 
 const Admin = () => {
     const [id, setId] = useState(0);
     const [quizData, setQuizData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
-    // const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
+    
     const style = {
         padding: '1px',
         margin: '15px'
     };
+      
+    useEffect( () => {
+        const fetchInfo = () => {
+            try {
+                setError(null);
+                setLoading(true);
+                axios.get(endPoint)
+                    .then((res) => {
+                        setQuizData(dataToObj(res.data))
+                        setId(findLastId(res.data))
+                    });
+            } catch (e) {
+                console.log(e)
+                setError(e);
+            }
+            setLoading(false);
+        }
+        fetchInfo();
+    }, []);
   
     const findLastId = (data) => {
-        let lastId = -1;
-        let i = 0;
-        while (data[i]){
-            if (data[i].id > lastId){
-                lastId = data[i].id;
-            }
-            i++;
-        }
-        return lastId;
+        return data.reduce((prev, curr) => prev > curr.id ? prev : curr, -1);
     };
-    const dataToJson = (data) => {
+    const dataToObj = (data) => {
         let objData = [];
         const idSet = new Set();
-        for (let i=0; i < data.length; i++){
-            idSet.add(data[i].id);
-        };
+        data.forEach(element => idSet.add(element.id));
+
         for (let item of idSet){
             const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
             for (let k=0; k < data.length; k++){
@@ -45,22 +55,6 @@ const Admin = () => {
         };
         return objData;
     };
-  
-    useEffect(() => {
-        const fetchInfo = async () => {
-            try {
-                setError(null);
-                setLoading(true);
-                const res = await axios.get(endPoint);
-                setQuizData(dataToJson(res.data));
-                setId(findLastId(res.data));
-            } catch (e) {
-                setError(e);
-            }
-            setLoading(false);
-        }
-        fetchInfo();
-    }, []);
   
     const addData = (data) => {
         if (!data) console.log("data was not input yet.");
