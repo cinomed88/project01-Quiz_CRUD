@@ -1,18 +1,17 @@
 import "./App.css";
 import { BrowserRouter, Switch, Route} from "react-router-dom";
-import Home from "./pages/Home";
-import Admin from "./pages/Admin";
-import Student from "./pages/Student";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
-import NavBar from "./components/NavBar";
+import Home from "./pages/Home.jsx";
+import Admin from "./pages/Admin.jsx";
+import Student from "./pages/Student.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import SignIn from "./pages/SignIn.jsx";
+import NavBar from "./components/NavBar.jsx";
 
 // export const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
 export const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
+const basePoint = "/portfolio/01";
 
-const basePoint = "/portfolio/01"
 function App() {
-
     return (      
         <BrowserRouter basename={basePoint}>
             <NavBar />

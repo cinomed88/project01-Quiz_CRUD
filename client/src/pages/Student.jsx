@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import QuizForStud from '../components/QuizForStud';
 import { endPoint } from "../App";
+import { dataToObj } from "../utilities/supportFuncs"
 
 const Student = () => {
     const [quizData, setQuizData] = useState(null);
@@ -9,12 +10,13 @@ const Student = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchInfo = async () => {
+        const fetchInfo = () => {
             try {
                 setError(null);
                 setLoading(true);
-                const res = await axios.get(endPoint);
-                setQuizData(dataToJson(res.data));
+                axios.get(endPoint).then((res) => {
+                    setQuizData(dataToObj(res.data));
+                });
             } catch (e) {
                 setError(e);
             };
@@ -22,26 +24,6 @@ const Student = () => {
         };
         fetchInfo();
     }, []);
-
-    const dataToJson = (data) => {
-        let objData = [];
-        const idSet = new Set();
-        for (let i=0; i < data.length; i++){
-            idSet.add(data[i].id);
-        };
-        for (let item of idSet){
-            const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
-            for (let k=0; k < data.length; k++){
-                if (data[k].id === item){
-                    if (!tempObj.question) tempObj.question = data[k].question;
-                    if (!tempObj.answer) tempObj.answer = data[k].answer;
-                    tempObj.choiceDesc[data[k].choice-1] = data[k].description;
-                };
-            };
-            objData.push(tempObj); 
-        };
-        return objData;
-    };
 
     if (loading) return <div>Now Loading...</div>;
     if (error) return <div>Error!</div>;

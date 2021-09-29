@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import QuizForm from "../components/QuizForm";
 import QuizList from "../components/QuizList";
 import { endPoint } from "../App";
+import { dataToObj } from "../utilities/supportFuncs"
 
 const Admin = () => {
     const [id, setId] = useState(0);
@@ -22,8 +23,8 @@ const Admin = () => {
                 setLoading(true);
                 axios.get(endPoint)
                     .then((res) => {
-                        setQuizData(dataToObj(res.data))
-                        setId(findLastId(res.data))
+                        setQuizData(dataToObj(res.data));
+                        setId(res.data.reduce((prev, curr) => prev > curr.id ? prev : curr, -1));
                     });
             } catch (e) {
                 console.log(e)
@@ -33,28 +34,6 @@ const Admin = () => {
         }
         fetchInfo();
     }, []);
-  
-    const findLastId = (data) => {
-        return data.reduce((prev, curr) => prev > curr.id ? prev : curr, -1);
-    };
-    const dataToObj = (data) => {
-        let objData = [];
-        const idSet = new Set();
-        data.forEach(element => idSet.add(element.id));
-
-        for (let item of idSet){
-            const tempObj = {"id": item, "question": null, "answer": null, "choiceDesc": []};
-            for (let k=0; k < data.length; k++){
-                if (data[k].id === item){
-                    if (!tempObj.question) tempObj.question = data[k].question;
-                    if (!tempObj.answer) tempObj.answer = data[k].answer;
-                    tempObj.choiceDesc[data[k].choice-1] = data[k].description;
-                }
-            };
-            objData.push(tempObj); 
-        };
-        return objData;
-    };
   
     const addData = (data) => {
         if (!data) console.log("data was not input yet.");
@@ -124,4 +103,5 @@ const Admin = () => {
         </div>
     ); 
 };
+
 export default Admin;
