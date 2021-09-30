@@ -17,13 +17,13 @@
  - Worse UX (3 Pages) -> Used React and React Router (SPA)
  - Wrong address hosting on router -> added 'basename' prop on 'BrowserRouter'   
  - 'refresh' cannot find a proper page, 404 error -> added .htaccess file with redirect option (Apache Server)
+ - Can't cover various screen sizes and resolutions -> Implement more detailed responsible design
  
  
  ## In Progress Issues & Promising Solutions:
  
  - Difficult to collect data and deliver them to the upper component when making a scoring system -> Apply Context API
  - Ambiguous data type (hard to debug) -> Use TypeScript
- - Can't cover various screen sizes and resolutions -> Implement more detailed responsible design
  - Worse SEO -> Apply Next.js
 
 
