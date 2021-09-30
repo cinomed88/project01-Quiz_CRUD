@@ -84,8 +84,8 @@ const Admin = () => {
         });
     };
   
-    if (loading) return <div>Now Loading...</div>;
-    if (error) return <div>Error!</div>;
+    if (loading) return <div className="App" style = {style}>Now Loading...</div>;
+    if (error) return <div className="App" style = {style}>Error!</div>;
   
     return (
         <div className="App" style = {style}>

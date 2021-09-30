@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, TextareaAutosize, FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
+import { Button, Input, TextareaAutosize, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 const QuizForm = (props) => {
     const style = {
