@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { AppBar, Box, Toolbar, IconButton, Typography } from "@mui/material";
-import { SwipeableDrawer, List, ListItem, ListItemIcon, ListItemText, Divider } from "@mui/material";
+import { AppBar, Box, Toolbar, IconButton, Typography, SwipeableDrawer, List, Divider } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import QuizIcon from '@mui/icons-material/Quiz';
@@ -9,6 +8,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import MenuIcon from '@mui/icons-material/Menu';
 import NavBarBtn from "./NavBarBtn";
 import { useMediaQuery } from "react-responsive"
+import ListItemLink from "./ListItemLink.jsx"
 
 const NavBar = () => {
     const mobileView = useMediaQuery({
@@ -30,23 +30,21 @@ const NavBar = () => {
             >
             <List>
                 {['Home', 'Admin', 'Student'].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>
-                    {index % 3 === 0 ? <HomeIcon /> : index === 1 ? <AdminPanelSettingsIcon /> : <QuizIcon/>}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
+                    <ListItemLink 
+                        to={index % 3 === 0 ? "/" : index === 1 ? "/admin" : "/student"} 
+                        primary={text}
+                        icon={index % 3 === 0 ? <HomeIcon /> : index === 1 ? <AdminPanelSettingsIcon /> : <QuizIcon/>}
+                    />
                 ))}
             </List>
             <Divider />
             <List>
                 {['SignIn', 'SignUp'].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>
-                    {index % 2 === 0 ? <LoginIcon /> : <CreateIcon />}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
+                    <ListItemLink 
+                        to={index % 2 === 0 ? "/signin" : "/signup"} 
+                        primary={text} 
+                        icon={index % 2 === 0 ? <LoginIcon /> : <CreateIcon />}
+                    />
                 ))}
             </List>
         </Box>
