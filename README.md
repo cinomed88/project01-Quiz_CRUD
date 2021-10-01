@@ -12,7 +12,7 @@
  
  
  ## Issues Solved
-|Issue | Solution|
+|Issues | Solution|
 |:--|:--|
 |Little Slow initiation | Changed the data retrieving structure, and used Axios instead of XMLHttpRequest|
 |Worse UX (3 Pages) | Used React and React Router (SPA)|
@@ -22,7 +22,7 @@
  
  
  ## In Progress Issues & Promising Solutions
-|Issue | Solution|
+|In Progress Issue | Promising Solution |
 |:--|:--|
 |Difficult to collect & deliver data to the upper component | Apply Context API|
 |Ambiguous data type (hard to debug when delivering data) | Use TypeScript|
