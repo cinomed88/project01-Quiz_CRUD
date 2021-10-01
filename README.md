@@ -24,7 +24,7 @@
  ## In Progress Issues & Promising Solutions
 |Issue | Solution|
 |:--|:--|
-|Difficult to collect data and deliver them to the upper component when making a scoring system | Apply Context API|
+|Difficult to collect & deliver data to the upper component | Apply Context API|
 |Ambiguous data type (hard to debug when delivering data) | Use TypeScript|
 |Worse SEO with SPA | Apply Next.js|
 
@@ -39,13 +39,16 @@
 
 ### 1. Ver 1.0.0 - Sep 2021
 #### (1) Skills used
-JavaScript, Node.js, MySQL/MariaDB, Bootstrap
+`JavaScript`, `Node.js`, `MySQL`, `Bootstrap`
 
 #### (2) Feature
-Users are able to read/create/edit/delete a quiz, solve the quiz, and get score. Provide REST API, Node.js server and MySQL Database. 
+ - Users are able to read/create/edit/delete a quiz, solve the quiz, and get score
+ - Provide REST API, Node.js server and MySQL Database
 
 #### (3) Issues
-Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface).
+ - Slow initial loading
+ - Little slow page transition
+ - Not intuitive interface
 
 #### (4) Screen Shots
 |Admin Page|Student Page|
