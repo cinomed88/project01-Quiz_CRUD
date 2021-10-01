@@ -38,15 +38,16 @@
  ## History
 
 ### 1. Ver 1.0.0 - Sep 2021
-#### (1) Skills used: 
+#### (1) Skills used
 JavaScript, Node.js, MySQL/MariaDB, Bootstrap
 
-#### (2) Feature: 
+#### (2) Feature
 Users are able to read/create/edit/delete a quiz, solve the quiz, and get score. Provide REST API, Node.js server and MySQL Database. 
 
-#### (3) Issues: 
+#### (3) Issues
 Slow initial loading, Worse UX/UI (little slow page transition, not intuitive interface).
 
+#### (4) Screen Shots
 |Admin Page|Student Page|
 |:--:|:--:|
 | <img src="https://user-images.githubusercontent.com/45385949/134595623-8ae3c289-074b-4f90-83f3-fde225665de7.png" width="500"/> | <img src="https://user-images.githubusercontent.com/45385949/134595640-e2587775-9419-4b90-aab1-8d1dfe2a29f9.png" width="500"/> |
