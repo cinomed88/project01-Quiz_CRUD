@@ -2,9 +2,9 @@
 
  [Live](https://lucaswgong.com/portfolio/01/) <- Click
 
- - Developed an online quiz app using React on the client-side and provided `RESTful API` on the server-side.
+ - Developed an online quiz app using `React` on the client-side and provided `RESTful API` on the server-side.
  - Built the React app using `Axios` to send HTTP requests, `React Router` for routing, and `Hooks API` to handle states.
- - Built CRUD API server using `Node.js and Express.js`, and database using `MySQL`.
+ - Built CRUD API server using `Node.js` and `Express.js`, and database using `MySQL`.
  - Deployed in a web hosting server using `cPanel`.
  
  
