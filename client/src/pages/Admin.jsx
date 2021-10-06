@@ -46,12 +46,8 @@ const Admin = () => {
             answer: data.answer,
             choiceDesc: data.choiceDesc     
         })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     };
   
     const updateData = (id, data) => {
@@ -62,26 +58,15 @@ const Admin = () => {
             answer: data.answer,
             choiceDesc: data.choiceDesc    
         })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     };
   
     const removeData = (id) => {
         setQuizData(quizData.filter(info => info.id !== id));
-        axios.delete(endPoint, 
-        {
-            data: id
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+        axios.delete(endPoint, { data: id })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     };
   
     if (loading) return <div className="App" style = {style}>Now Loading...</div>;

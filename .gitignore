@@ -2,6 +2,7 @@
 
 # dependencies
 /server/node_modules
+/server/sessions
 /.vscode
 /.pnp
 .pnp.js

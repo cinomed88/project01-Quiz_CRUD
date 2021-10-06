@@ -18,14 +18,14 @@ const QuizForm = (props) => {
         setQuiz({ ...quiz, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const onHandleSubmit = (e) => {
         e.preventDefault();
         props.addData({question: question, answer: answer, choiceDesc: [c1, c2, c3, c4]});
         setQuiz({question: '', answer: '', c1:'', c2:'', c3:'', c4:''});
     };
 
     return (        
-        <form style={style} onSubmit = {handleSubmit}>
+        <form style={style} onSubmit = {onHandleSubmit}>
             <h3>
                 <TextareaAutosize
                     placeholder="Describe a new question."                            
