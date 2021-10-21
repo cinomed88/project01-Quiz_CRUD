@@ -7,8 +7,8 @@ import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
 import NavBar from "./components/NavBar.jsx";
 
-// export const endPoint = "https://lucaswgong.com/projects/01/API/v2/questions";
-export const endPoint = "http://localhost:3001/projects/01/API/v2/questions";
+// export const endPoint = "https://lucaswgong.com/projects/01/API/v2/";
+export const endPoint = "http://localhost:3001/projects/01/API/v2";
 const basePoint = "/portfolio/01";
 
 function App() {

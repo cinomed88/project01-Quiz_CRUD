@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
+import { endPoint } from "../App";
 
 const SignIn = () => {
     const [user, setUser] = useState({username: '', password: ''});
     const { username, password } = user;
-    const [loginInfo, setLoginInfo] = useState(null);
+    // const [loginInfo, setLoginInfo] = useState(null);
 
     const onChangeInput = (e) => {
         const { name, value } = e.target;
@@ -14,9 +15,9 @@ const SignIn = () => {
     const onHandleSubmit = (e) => {
         const params = new URLSearchParams({ username, password })
         e.preventDefault();
-        axios.post("http://localhost:3001/projects/01/API/v2/auth/login", params)
+        axios.post(`${endPoint}/auth/login`, params, { withCredentials: true })
         .then((res) => {
-            setLoginInfo(res.data);
+            // setLoginInfo(res.data);
             console.log(res.data);
         })
         .catch((err) => console.log(err));
@@ -39,8 +40,8 @@ const SignIn = () => {
                     <input type="submit" value="Log In"/>
                 </div>
             </form>
-            <div> {loginInfo ? <h1>Welcome {loginInfo.username} !</h1> : null} </div>
+            {/* <div> {loginInfo ? <h1>Welcome {loginInfo.username} !</h1> : null} </div> */}
         </div>
-    );
+    ); 
 };
 export default SignIn;

@@ -7,27 +7,28 @@ import session from "express-session";
 import bodyParser from 'body-parser';
 import passport from "passport";
 // const bcrypt = require("bcryptjs");
-// const FileStore = require('session-file-store')(session);
+const FileStore = require('session-file-store')(session);
 
 const app = express();
 const port = process.env.PORT || 3001;
-const endPointRoot = "/projects/01/API/v2/questions";
+const questionPoint = "/projects/01/API/v2/questions";
 const authPoint = "/projects/01/API/v2/auth";
 
 const corsOptions = {
-    origin: [ "http://localhost:3000" ],
+    origin: "http://localhost:3000",
     optionsSuccessStatus: 200,
     credentials: true
 };
 
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 
 app.use(session({
-    secret: "keyboard cat", // session id cookie, should be hidden
+    secret: "lucas gong", // secret code
     resave: false,
     saveUninitialized: true,
-    // store: new FileStore()
+    store: new FileStore()
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,13 +43,16 @@ auth(passport);
 //     };
 //     res.send("User Created");
 // });
+
 app.post(`${authPoint}/login`, (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {  
-        console.log(err, user, info)
-        if (err) { return next(err); }
-        if (!user) { return res.send(false); }
+    passport.authenticate('local', (err, user, info) => { 
+        if (err) return next(err);
+        if (!user) return res.send(false);
         req.logIn(user, (err) => {
-            if (err) { return next(err); }
+            if (err) return next(err);
+            console.log('authentificatie login:', user);/////
+            console.log('session', req.session);/////
+            // res.cookie('sid', req.session.passport.user)
             return res.send(user);
         });
     })(req, res, next);
@@ -62,7 +66,7 @@ app.get(`${authPoint}/logout`, (req, res) => {
     });
 });
 
-app.use(endPointRoot, router);
+app.use(questionPoint, router);
 
 app.listen(port, () => {
     console.log(`The server is listening at http://localhost:${port}`);

@@ -21,7 +21,7 @@ const Admin = () => {
             try {
                 setError(null);
                 setLoading(true);
-                axios.get(endPoint)
+                axios.get(`${endPoint}/questions`)
                     .then((res) => {
                         setQuizData(dataToObj(res.data));
                         setId(res.data.reduce((prev, curr) => prev > curr.id ? prev : curr, -1));
@@ -40,7 +40,7 @@ const Admin = () => {
     
         setQuizData(quizData.concat({ id: id+1, ...data }));
         setId(id+1);
-        axios.post(endPoint, {
+        axios.post(`${endPoint}/questions`, {
             id: id+1,
             question: data.question,
             answer: data.answer,
@@ -52,7 +52,7 @@ const Admin = () => {
   
     const updateData = (id, data) => {
         setQuizData(quizData.map(info => id === info.id ? { ...info, ...data } : info));
-        axios.put(endPoint, {
+        axios.put(`${endPoint}/questions`, {
             id: id,
             question: data.question,
             answer: data.answer,
@@ -64,7 +64,7 @@ const Admin = () => {
   
     const removeData = (id) => {
         setQuizData(quizData.filter(info => info.id !== id));
-        axios.delete(endPoint, { data: id })
+        axios.delete(`${endPoint}/questions`, { data: id })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     };
