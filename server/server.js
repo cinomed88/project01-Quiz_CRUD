@@ -52,17 +52,16 @@ app.post(`${authPoint}/login`, (req, res, next) => {
             if (err) return next(err);
             console.log('authentificatie login:', user);/////
             console.log('session', req.session);/////
-            // res.cookie('sid', req.session.passport.user)
             return res.send(user);
         });
     })(req, res, next);
 });
 
 app.get(`${authPoint}/logout`, (req, res) => {
-    req.logOut();
+    req.logout();
     req.session.save(err => {
-      if (err) throw err;
-      res.send("Complete to logout");
+        if (err) throw err;
+        res.send(true);
     });
 });
 

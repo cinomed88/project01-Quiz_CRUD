@@ -5,6 +5,7 @@ import Admin from "./pages/Admin.jsx";
 import Student from "./pages/Student.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import SignIn from "./pages/SignIn.jsx";
+import SignOut from "./pages/SignOut.jsx";
 import NavBar from "./components/NavBar.jsx";
 
 // export const endPoint = "https://lucaswgong.com/projects/01/API/v2/";
@@ -18,9 +19,10 @@ function App() {
             <Switch>
                 <Route path = "/" exact component = {Home}/>                
                 <Route path = "/admin" component = {Admin}/>
-                <Route path = "/student" component = {Student}/>
-                <Route path = "/signup" component = {SignUp}/>
+                <Route path = "/student" component = {Student}/>                
                 <Route path = "/signin" component = {SignIn}/>
+                <Route path = "/signout" component = {SignOut}/>
+                <Route path = "/signup" component = {SignUp}/>
             </Switch>
         </BrowserRouter>
     );

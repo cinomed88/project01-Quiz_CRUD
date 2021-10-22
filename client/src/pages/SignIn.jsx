@@ -1,11 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { endPoint } from "../App";
+import { Redirect } from "react-router";
 
 const SignIn = () => {
     const [user, setUser] = useState({username: '', password: ''});
     const { username, password } = user;
-    // const [loginInfo, setLoginInfo] = useState(null);
+    const [loginState, setLoginState] = useState(null);
 
     const onChangeInput = (e) => {
         const { name, value } = e.target;
@@ -17,12 +18,14 @@ const SignIn = () => {
         e.preventDefault();
         axios.post(`${endPoint}/auth/login`, params, { withCredentials: true })
         .then((res) => {
-            // setLoginInfo(res.data);
             console.log(res.data);
+            if (res.data) setLoginState(true);
         })
         .catch((err) => console.log(err));
         setUser({ username: '', password: '' });
     }
+
+    if (loginState) return <Redirect to="/" />
 
     return(
         <div className="App">
@@ -40,7 +43,6 @@ const SignIn = () => {
                     <input type="submit" value="Log In"/>
                 </div>
             </form>
-            {/* <div> {loginInfo ? <h1>Welcome {loginInfo.username} !</h1> : null} </div> */}
         </div>
     ); 
 };
