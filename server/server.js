@@ -5,6 +5,7 @@ import auth from "./auth";
 import cors from "cors";
 import session from "express-session";
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import passport from "passport";
 // const bcrypt = require("bcryptjs");
 const FileStore = require('session-file-store')(session);
@@ -22,6 +23,7 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(cors(corsOptions));
 
 app.use(session({

@@ -25,7 +25,7 @@ const Admin = () => {
                     .then((res) => {
                         setQuizData(dataToObj(res.data));
                         setId(res.data.reduce((prev, curr) => prev > curr.id ? prev : curr, -1));
-                    });
+                    }, { withCredentials: true });
             } catch (e) {
                 console.log(e)
                 setError(e);
@@ -45,7 +45,7 @@ const Admin = () => {
             question: data.question,
             answer: data.answer,
             choiceDesc: data.choiceDesc     
-        })
+        }, { withCredentials: true })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     };
@@ -57,14 +57,14 @@ const Admin = () => {
             question: data.question,
             answer: data.answer,
             choiceDesc: data.choiceDesc    
-        })
+        }, { withCredentials: true })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     };
   
     const removeData = (id) => {
         setQuizData(quizData.filter(info => info.id !== id));
-        axios.delete(`${endPoint}/questions`, { data: id })
+        axios.delete(`${endPoint}/questions`, { data: id }, { withCredentials: true })
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     };

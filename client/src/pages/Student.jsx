@@ -14,7 +14,7 @@ const Student = () => {
             try {
                 setError(null);
                 setLoading(true);
-                axios.get(`${endPoint}/questions`).then((res) => {
+                axios.get(`${endPoint}/questions`, { withCredentials: true }).then((res) => {
                     setQuizData(dataToObj(res.data));
                 });
             } catch (e) {
